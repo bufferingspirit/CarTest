@@ -8,9 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.PendingIntent.getActivity;
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Admin on 8/11/2017.
@@ -21,11 +25,13 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
     List<Car> cars;
     private static String TAG = "Cars: ";
     Context context;
+    DisplayFragment fragment;
 
     //Context context;
 
-    public CarAdapter(List<Car> carList){
+    public CarAdapter(List<Car> carList, DisplayFragment frag){
         this.cars = carList;
+        fragment = frag;
     }
 
 
@@ -62,12 +68,11 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                fragment.display(car);
             }
         });
 
     }
-
 
     @Override
     public int getItemCount() {

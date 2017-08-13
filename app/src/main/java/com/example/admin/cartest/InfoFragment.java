@@ -68,6 +68,12 @@ public class InfoFragment extends Fragment{
         btnAdd = view.findViewById(R.id.btnAdd);
     }
 
+    public void display(Car car){
+        etModel.setText(car.getModel());
+        etType.setText(car.getType());
+        etYear.setText(car.getYear());
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
 
     @Override

@@ -52,6 +52,9 @@ public class DisplayFragment extends Fragment{
         if (getArguments() != null) {
             cars = (ArrayList<Car>) getArguments().getSerializable("cars");
         }
+        else{
+            cars = new ArrayList<Car>();
+        }
     }
 
     @Override
@@ -69,9 +72,16 @@ public class DisplayFragment extends Fragment{
         itemAnimator = new DefaultItemAnimator();
         rView.setLayoutManager(layoutManager);
         rView.setItemAnimator(itemAnimator);
-        carAdapter = new CarAdapter(cars);
+        carAdapter = new CarAdapter(cars, this);
         rView.setAdapter(carAdapter);
 
+    }
+
+    public void add(Car car) {
+        if (!cars.contains(car) || cars == null){
+            cars.add(car);
+            carAdapter.notifyDataSetChanged();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -96,6 +106,10 @@ public class DisplayFragment extends Fragment{
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void display(Car car) {
+        mListener.onFragmentInteraction(car, "show");
     }
 
     /**
